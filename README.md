@@ -6,9 +6,7 @@ A simple library application to save books to a reading list.
 
 #### Features
 - [ ] Basic form features (book title, author, pages, isRead?)
-- [ ] JS script for adding and removing book
-
-      - Implement with a library[] stack and renderer
+- [ ] JS script for adding and removing book: implement with a library[] stack and renderer
 
 #### Formatting
 - [ ] Page layout with header, buttons, main content (library) grid, auto placement of new book cards
