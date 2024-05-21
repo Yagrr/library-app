@@ -3,12 +3,76 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Libellus</title>
+        <title>Libellus - Track your reading list!</title>
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
         <!-- TODO: Create page layout with header and grid. 
-             Create button to add book entry  --> 
+                Create button to add book entry  --> 
+
+        <!---------Header--------->
+        <header>
+            <div class="title">Libellus</div>
+            <button class="btnSearch"></button> 
+            <!-- TODO: Hide search form until clicked on by btnSearch -->
+            <form action='' method='get' class='searchbar'>
+                <div class='form-row'>
+                    <input id='search' name='search' type='text' placeholder="Search"/>
+                </div>
+            </form>
+
+        </header>
+
+        <!---------Main--------->
+        <main class="bkGrid"> 
+
+            <div class="bkCard">
+                <div class="bkTitle"> The C Programming Language 2nd ed.</div> 
+                <ul class="bkAuthorList">
+                    <li>Brian Kernighan</li>     
+                    <li>Dennis Ritchie</li>
+                </ul>
+                <div class="bkYear">1988</div>
+                <div class="bkPages">238</div>
+                <!--- TODO: If read (bookPagesRead = bookPages) then change color and add Read attribute --->
+                <input class="bkPagesRead" type="range" min="0" max="238" step="1" value="0">
+                <div class="bkBtns">
+                    <button class="editBk">Edit</button>
+                    <button class="deleteBk">X</button>
+                </div>
+            </div>
+
+        </main>
+            <!-- 
+            TODO: mobile - Position absolute on bottom right of screen 
+            Add button book to header
+            -->
+            <button class="addBook">+</button>
+
+        <!---------Book statistics--------->
+        <div class="bkStats">
+            <!---
+            TODO: track total books, total pages, read books, unread
+            --->   
+        </div>
+        
+        <!---------Footer--------->
+        <footer>
+            
+        </footer>
+     
+        <!---------Modals--------->
+            <div class="modal">
+
+                <!---------Modal: new entry--------->
+                <div class="modalNew">
+                </div>
+
+                <!---------Modal: edit entry--------->
+                <div class="modalEdit">
+                </div>
+
+            </div>
     </body>
     <script src="js/script.js"></script>
 </html>
