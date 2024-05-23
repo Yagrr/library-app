@@ -28,14 +28,15 @@
 
             <div class="bkCard">
                 <div class="bkTitle"> The C Programming Language 2nd ed.</div> 
-                <ul class="bkAuthorList">
-                    <li>Brian Kernighan</li>     
-                    <li>Dennis Ritchie</li>
-                </ul>
+                <div class="bkAuthor">
+                    Brian Kernighan & Dennis Ritchie
+                </div>
                 <div class="bkYear">1988</div>
                 <div class="bkPages">238</div>
                 <!--- TODO: If read (bookPagesRead = bookPages) then change color and add Read attribute --->
-                <input class="bkPagesRead" type="range" min="0" max="238" step="1" value="0">
+                <div>Pages read:</div>
+                <input class="bkPagesRead" type="range" min="0" max="238" step="1" value="0" oninput="this.nextElementSibling.value = this.value">
+                <output></output>
                 <div class="bkBtns">
                     <button class="editBk">Edit</button>
                     <button class="deleteBk">X</button>
@@ -62,17 +63,63 @@
         </footer>
      
         <!---------Modals--------->
-            <div class="modal">
+        <div class="backdrop"></div>
 
-                <!---------Modal: new entry--------->
-                <div class="modalNew">
-                </div>
+            <!---------Modal: new entry--------->
+            <dialog class="modal modalNew">
+                <form id="formNewBook" action="" method="get">
+                    <div class="form-row">
+                        <label for="bookTitle">Book Title</label>
+                        <input 
+                            id="bookTitle"
+                            name="bookTitle"
+                            type="text"
+                        />
+                    </div>
 
-                <!---------Modal: edit entry--------->
-                <div class="modalEdit">
-                </div>
 
-            </div>
+                    <div class="form-row">
+                        <label for="bookAuthor">Author(s)</label>
+                        <input 
+                            id="bookAuthor"
+                            name="bookAuthor"
+                            type="text"
+                        />
+                    </div>
+
+                    <div class="form-row">
+                        <label for="bookYear">Year</label>
+                        <input 
+                            id="bookYear"
+                            name="bookYear"
+                            type="number"
+                            min="0"
+                            max="2025"
+                            step="1"
+                        />
+                    </div>
+
+                    <div class="form-row">
+                        <label for="bookPages">Pages</label>
+                        <input 
+                            id="bookPages"
+                            name="bookPages"
+                            type="number"
+                            min="0"
+                            max="9999"
+                            step="1"
+                        />
+                    </div>
+
+                    <button form="formNewBook" class="bkSubmit">Submit</button>
+                </form>
+            </dialog>
+
+            <!---------Modal: edit entry--------->
+            <dialog class="modal modalEdit">
+            </dialog>
+
+        </div>
     </body>
     <script src="js/script.js"></script>
 </html>
