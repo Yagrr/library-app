@@ -8,3 +8,45 @@ body {
  TODO: Add page styling with grid layout.
          Add styling for buttons (add and remove entry) 
  */
+
+
+/* TODO: MODAL styling (to rename selectors)
+.popup-modal {
+  padding: 32px 64px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  transform: translate(-50%, -150%);
+  pointer-events: none;
+  opacity: 0%;
+  text-align: center;
+}
+
+.popup-modal p {
+  margin-bottom: 24px;
+}
+
+.backdrop {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: #000;
+  opacity: 0%;
+}
+
+.popup-modal.show {
+  opacity: 100%;
+  pointer-events: all;
+  transform-origin: center;
+  transform: translate(-50%, -50%);
+  transition: opacity .15s, transform .15s;
+}
+
+.backdrop.show {
+  opacity: 30%;
+}
+*/
