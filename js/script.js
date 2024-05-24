@@ -26,15 +26,18 @@ class Book {
 // Add book card html elements onto grid
 function refreshLibrary() {
     for (let i = 0; i < library.length; i++) {
-        bkGrid.insertAdjacentElement('beforeend','<div class="bkCard>"'
-                + "<div class='bkTitle'>" + library[i].title + "</div>"
-                + "<div class='bkAuthor'>" + library[i].author + "</div>"
-                + "<div class='bkYear'>" + library[i].year + "</div>"
-                + "<div class='bkPages'>" + library[i].pages + "</div>"
-                + "<output></output>"
-                + "<input class='bkPagesRead' type='range' min='0' max='" + library[i].pages + "' step='1' value='0' oninput='this.nextElementSibling.value = this.value'>"
-                + "<div class='bkBtns'> <button class='editBk'>Edit</button> <button class='deleteBk'>X</button> </div>"
+        bkGrid.insertAdjacentElement('beforeend',
+            '<div class="bkCard>"'
+                + "<div class='bkInfo'>"
+                        + "<div class='bkTitle'>" + library[i].title + "</div>"
+                        + "<div class='bkAuthor'>" + library[i].author + "</div>"
+                        + "<div class='bkYear'>" + library[i].year + "</div>"
+                        + "<div class='bkPages'>" + library[i].pages + " pages</div>"
+                        + "<output></output>"
+                        + "<input class='bkPagesRead' type='range' min='0' max='" + library[i].pages + "' step='1' value='0' oninput='this.previousElementSibling.value = 'Pages read: ' + this.value'>"
+                        + "<div class='bkBtns'> <button class='editBk'>Edit</button> <button class='deleteBk'>X</button> </div>"
                 + "</div>"
+            + "</div>"
         );
     }
 }
