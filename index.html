@@ -10,58 +10,66 @@
         <!-- TODO: Create page layout with header and grid. 
                 Create button to add book entry  --> 
 
-        <!---------Header--------->
-        <header>
-            <div class="title">Libellus</div>
-            <button class="btnSearch"></button> 
-            <!-- TODO: Hide search form until clicked on by btnSearch -->
-            <form action='' method='get' class='searchbar'>
-                <div class='form-row'>
-                    <input id='search' name='search' type='text' placeholder="Search"/>
+        <!---------Wrapper--------->
+        <div class="wrapper">
+            <!---------Header--------->
+            <header>
+                <div class="title">Libellus</div>
+
+                <!-- TODO: Hide search form until clicked on by btnSearch -->
+                <div class="search-wrapper">
+                    <form action='' method='get' class='searchbar'>
+                        <div class='form-row'>
+                            <input id='search' name='search' type='text' placeholder="Search"/>
+                        </div>
+                    </form>
+                    <button class="btnSearch"></button> 
                 </div>
-            </form>
+            </header>
 
-        </header>
+            <!---------Main--------->
+            <main> 
 
-        <!---------Main--------->
-        <main class="bkGrid"> 
-
-            <div class="bkCard">
-                <div class="bkTitle"> The C Programming Language 2nd ed.</div> 
-                <div class="bkAuthor">
-                    Brian Kernighan & Dennis Ritchie
+                <div class="bkGrid">
+                    <div class="bkCard">
+                        <div class="bkInfo">
+                            <div class="bkTitle"> The C Programming Language 2nd ed.</div> 
+                            <div class="bkAuthor">
+                                Brian Kernighan & Dennis Ritchie
+                            </div>
+                            <div class="bkYear">1988</div>
+                            <div class="bkPages">238 pages</div>
+                        </div>
+                        <!--- TODO: If read (bookPagesRead = bookPages) then change color and add Read attribute --->
+                        <output>Pages read: </output>
+                        <input class="bkPagesRead" type="range" min="0" max="238" step="1" value="0" oninput="this.previousElementSibling.value = 'Pages read: ' + this.value">
+                        <div class="bkBtns">
+                            <button class="editBk">Edit</button>
+                            <button class="deleteBk">X</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="bkYear">1988</div>
-                <div class="bkPages">238</div>
-                <!--- TODO: If read (bookPagesRead = bookPages) then change color and add Read attribute --->
-                <div>Pages read:</div>
-                <input class="bkPagesRead" type="range" min="0" max="238" step="1" value="0" oninput="this.nextElementSibling.value = this.value">
-                <output></output>
-                <div class="bkBtns">
-                    <button class="editBk">Edit</button>
-                    <button class="deleteBk">X</button>
-                </div>
-            </div>
 
-        </main>
+            </main>
             <!-- 
-            TODO: mobile - Position absolute on bottom right of screen 
-            Add button book to header
-            -->
+TODO: mobile - Position absolute on bottom right of screen 
+Add button book to header
+-->
             <button class="addBook">+</button>
 
-        <!---------Book statistics--------->
-        <div class="bkStats">
-            <!---
-            TODO: track total books, total pages, read books, unread
-            --->   
+            <!---------Book statistics--------->
+            <div class="bkStats">
+                <!---
+TODO: track total books, total pages, read books, unread
+--->   
+            </div>
+
+            <!---------Footer--------->
+            <footer>
+
+            </footer>
+
         </div>
-        
-        <!---------Footer--------->
-        <footer>
-            
-        </footer>
-     
         <!---------Modals--------->
         <div class="backdrop"></div>
 
