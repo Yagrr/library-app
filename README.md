@@ -9,8 +9,7 @@ A simple library application to save books to a reading list.
 - [ ] Store book information using object data structure in array
 - [ ] Display book as cards in grid
 - [ ] Create button to delete a given book from the library
-- [ ] Change isRead? boolean into a % slider based on #pages to track how much
-of the book has been read. 
+- [ ] Card border color (green/red) indicates whether a book is read or not, depending on whether Pages Read == Number of pages
 
 
 #### Additional features
