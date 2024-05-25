@@ -181,6 +181,7 @@ footer {
 
 .backdrop.show {
     opacity: 30%;
+    pointer-events: all;
 }
 
 /* Styling Resets */
