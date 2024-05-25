@@ -35,7 +35,7 @@ function refreshLibrary() {
                         + "<div class='bkYear'>" + library[i].year + "</div>"
                         + "<div class='bkPages'>" + library[i].pages + " pages</div>"
                     + "</div>"
-                    + "<output></output>"
+                    + "<output>Pages read:</output>"
                     + "<input class='bkPagesRead' type='range' min='0' max='" + library[i].pages + "' step='1' value='0' oninput='this.previousElementSibling.value = &#39;Pages read: &#39; + this.value' />"
                     +"<div class='bkBtns'>"
                         + "<button class='editBk'>Edit</button>" 
