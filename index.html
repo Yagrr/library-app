@@ -71,10 +71,10 @@ TODO: track total books, total pages, read books, unread
 
         </div>
         <!---------Modals--------->
-        <div class="backdrop"></div>
+        <div id="backdropID" class="backdrop"></div>
 
             <!---------Modal: new entry--------->
-            <dialog class="modal modalNew">
+            <dialog id="modalNew" class="modal">
                 <form id="formNewBook" action="" method="get">
                     <div class="form-row">
                         <label for="bookTitle">Book Title</label>
@@ -124,10 +124,9 @@ TODO: track total books, total pages, read books, unread
             </dialog>
 
             <!---------Modal: edit entry--------->
-            <dialog class="modal modalEdit">
+            <dialog id="modalEdit" class="modal">
             </dialog>
 
-        </div>
     </body>
     <script src="js/script.js"></script>
 </html>
