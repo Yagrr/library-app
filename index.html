@@ -40,7 +40,6 @@
                             <div class="bkYear">1988</div>
                             <div class="bkPages">238 pages</div>
                         </div>
-                        <!--- TODO: If read (bookPagesRead = bookPages) then change color and add Read attribute --->
                         <output>Pages read: </output>
                         <input class="bkPagesRead" type="range" min="0" max="238" step="1" value="0" oninput="this.previousElementSibling.value = 'Pages read: ' + this.value">
                         <div class="bkBtns">
@@ -64,7 +63,7 @@ TODO: track total books, total pages, read books, unread
 --->   
             </div>
 
-            <!---------Footer--------->
+        <!---------Footer--------->
             <footer>
 
             </footer>
@@ -73,55 +72,55 @@ TODO: track total books, total pages, read books, unread
         <!---------Modals--------->
         <div id="backdropID" class="backdrop"></div>
 
-            <!---------Modal: new entry--------->
-            <dialog id="modalNew" class="modal">
-                <form id="formNewBook" action="" method="get">
-                    <div class="form-row">
-                        <label for="bookTitle">Book Title</label>
-                        <input 
-                            id="bookTitle"
-                            name="bookTitle"
-                            type="text"
-                        />
-                    </div>
+        <!---------Modal: new entry--------->
+        <dialog id="modalNew" class="modal">
+            <form id="formNewBook">
+                <div class="form-row">
+                    <label for="bookTitle">Book Title</label>
+                    <input 
+                    id="bookTitle"
+                    name="bookTitle"
+                    type="text"
+                />
+                </div>
 
 
-                    <div class="form-row">
-                        <label for="bookAuthor">Author(s)</label>
-                        <input 
-                            id="bookAuthor"
-                            name="bookAuthor"
-                            type="text"
-                        />
-                    </div>
+                <div class="form-row">
+                    <label for="bookAuthor">Author(s)</label>
+                    <input 
+                    id="bookAuthor"
+                    name="bookAuthor"
+                    type="text"
+                />
+                </div>
 
-                    <div class="form-row">
-                        <label for="bookYear">Year</label>
-                        <input 
-                            id="bookYear"
-                            name="bookYear"
-                            type="number"
-                            min="0"
-                            max="2025"
-                            step="1"
-                        />
-                    </div>
+                <div class="form-row">
+                    <label for="bookYear">Year</label>
+                    <input 
+                    id="bookYear"
+                    name="bookYear"
+                    type="number"
+                    min="0"
+                    max="2025"
+                    step="1"
+                />
+                </div>
 
-                    <div class="form-row">
-                        <label for="bookPages">Pages</label>
-                        <input 
-                            id="bookPages"
-                            name="bookPages"
-                            type="number"
-                            min="0"
-                            max="9999"
-                            step="1"
-                        />
-                    </div>
+                <div class="form-row">
+                    <label for="bookPages">Pages</label>
+                    <input 
+                    id="bookPages"
+                    name="bookPages"
+                    type="number"
+                    min="0"
+                    max="9999"
+                    step="1"
+                />
+                </div>
 
-                    <button form="formNewBook" class="bkSubmit">Submit</button>
-                </form>
-            </dialog>
+                <button form="formNewBook" class="bkSubmit">Submit</button>
+            </form>
+        </dialog>
 
             <!---------Modal: edit entry--------->
             <dialog id="modalEdit" class="modal">

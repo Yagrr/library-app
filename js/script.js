@@ -3,20 +3,18 @@
 // TODO: Add DOM manipulation for removing entry
 const bkGrid = document.querySelector(".bkGrid");
 
+const formNewBook = document.getElementById("formNewBook");
 const btnAddBook = document.querySelector(".addBook");
+const btnSubmit = document.querySelector(".bkSubmit");
 
 const backdropID = document.getElementById("backdropID");
 const modalNew = document.getElementById("modalNew");
 const modalEdit = document.getElementById("modalEdit");
 const modalDel = document.querySelector(".modalDelete");
 
-const library = [];
-
-// TODO: Add book card elements using bkCard.insertAdjacentHTML() method for a
-// given object
-
 // NOTE: Library interactions
 
+const library = [];
 class Book {
     constructor(title, author, year, pages) {
         this.title = title;
@@ -29,19 +27,22 @@ class Book {
 // Add book card html elements onto grid
 function refreshLibrary() {
     for (let i = 0; i < library.length; i++) {
-        bkGrid.insertAdjacentElement('beforeend',
-            '<div class="bkCard>"'
-                + "<div class='bkInfo'>"
-                + "<div class='bkTitle'>" + library[i].title + "</div>"
-                + "<div class='bkAuthor'>" + library[i].author + "</div>"
-                + "<div class='bkYear'>" + library[i].year + "</div>"
-                + "<div class='bkPages'>" + library[i].pages + " pages</div>"
-                + "<output></output>"
-                + "<input class='bkPagesRead' type='range' min='0' max='" + library[i].pages + "' step='1' value='0' oninput='this.previousElementSibling.value = 'Pages read: ' + this.value'>"
-                + "<div class='bkBtns'> <button class='editBk'>Edit</button> <button class='deleteBk'>X</button> </div>"
-                + "</div>"
-                + "</div>"
-        );
+        let bookHTML =
+            "<div class='bkCard'>"
+                    + "<div class='bkInfo'>"
+                        + "<div class='bkTitle'>" + library[i].title + "</div>"
+                        + "<div class='bkAuthor'>" + library[i].author + "</div>"
+                        + "<div class='bkYear'>" + library[i].year + "</div>"
+                        + "<div class='bkPages'>" + library[i].pages + " pages</div>"
+                    + "</div>"
+                    + "<output></output>"
+                    + "<input class='bkPagesRead' type='range' min='0' max='" + library[i].pages + "' step='1' value='0' oninput='this.previousElementSibling.value = &#39;Pages read: &#39; + this.value' />"
+                    +"<div class='bkBtns'>"
+                        + "<button class='editBk'>Edit</button>" 
+                        + "<button class='deleteBk'>X</button>"
+                    + "</div>"
+                + "</div>";
+        bkGrid.insertAdjacentHTML('beforeend', bookHTML);
     }
 }
 // NOTE: Button and modal interactions
@@ -49,6 +50,23 @@ function refreshLibrary() {
 btnAddBook.addEventListener("click", () => {
     toggleModal(modalNew);
 });
+
+btnSubmit.addEventListener("click", () => {
+    closeModal(); 
+});
+
+formNewBook.addEventListener('submit', createBook);
+
+function createBook(event) {
+    event.preventDefault()
+    const bookData = new FormData(event.target);
+    const title = bookData.get('bookTitle');
+    const author = bookData.get('bookAuthor');
+    const year = bookData.get('bookYear');
+    const pages = bookData.get('bookPages');
+    library.push( new Book(title, author, year, pages) );
+    refreshLibrary();
+}
 
 backdropID.addEventListener("click", () => {
     closeModal(); 
@@ -66,5 +84,3 @@ function toggleModal(modal) {
     backdrop.classList.toggle("show");
     modal.classList.toggle("show");
 }
-
-
