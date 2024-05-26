@@ -26,10 +26,12 @@ class Book {
 
 // Add book card html elements onto grid
 function refreshLibrary() {
+    // TODO: Fix bug with duplicated entries. Need to delete all entries first
+    delAllDisplayedBooks();
     for (let i = 0; i < library.length; i++) {
         let bookHTML =
             "<div class='bkCard'>"
-                    + "<div class='bkInfo'>"
+                    + "<div class='bkInfo' index = '" + i + "'>"
                         + "<div class='bkTitle'>" + library[i].title + "</div>"
                         + "<div class='bkAuthor'>" + library[i].author + "</div>"
                         + "<div class='bkYear'>" + library[i].year + "</div>"
@@ -58,7 +60,7 @@ btnSubmit.addEventListener("click", () => {
 formNewBook.addEventListener('submit', createBook);
 
 function createBook(event) {
-    event.preventDefault()
+    event.preventDefault();
     const bookData = new FormData(event.target);
     const title = bookData.get('bookTitle');
     const author = bookData.get('bookAuthor');
@@ -66,6 +68,18 @@ function createBook(event) {
     const pages = bookData.get('bookPages');
     library.push( new Book(title, author, year, pages) );
     refreshLibrary();
+}
+
+// TODO: Write delete book function. Account for library array and html
+function delBook(event) {
+    event.preventDefault();
+
+}
+
+function delAllDisplayedBooks() {
+    while (bkGrid.firstChild) {
+        bkGrid.removeChild(bkGrid.lastChild);
+    }
 }
 
 backdropID.addEventListener("click", () => {
