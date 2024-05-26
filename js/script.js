@@ -23,6 +23,7 @@ class Book {
         this.year = year;
         this.pages = pages;
         this.pagesRead = 0;
+        this.isRead = false;
     }
 }
 
@@ -65,6 +66,7 @@ function refreshLibrary() {
 }
 
 // NOTE: Update pagesRead property when input range is used for a given card
+// Change card style depending on whether it is read
 // HACK: Attaching event listeners to dynamic elements is annoying
 // Using event listener on grid. Trigger if target = bkPagesRead
 
@@ -88,10 +90,22 @@ bkGrid.addEventListener('ontouchend', (e) => {
 });
 
 function updatePagesRead(e) {
-        const inputPagesRead = e.target;
-        const card = inputPagesRead.parentNode;
-        const cardIndex = card.getAttribute("index");
-        library[cardIndex].pagesRead = inputPagesRead.value;
+    const inputPagesRead = e.target;
+    const card = inputPagesRead.parentNode;
+    const cardIndex = card.getAttribute("index");
+    library[cardIndex].pagesRead = inputPagesRead.value;
+    
+    // change style to green if read by adding isRead class
+    if (library[cardIndex].pagesRead == library[cardIndex].pages) {
+        library[cardIndex].isRead = true;
+        card.classList.add("isRead");
+        inputPagesRead.classList.add("isRead");
+    } 
+    else {  
+        library[cardIndex].isRead = false;
+        card.classList.remove("isRead");
+        inputPagesRead.classList.remove("isRead");
+    }
 }
 
 // NOTE: Book creation (modals and buttons)

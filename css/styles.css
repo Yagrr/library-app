@@ -3,6 +3,7 @@
     --bgSecondary: #343B43;
     --fontCol: #D2C6AA;
     --cardColor: #714B36;
+    --isRead: #458664;
 }
 
 body {
@@ -125,6 +126,14 @@ main {
     accent-color: #680F15;
 }
 
+/* isRead - Green up */
+.bkCard.isRead {
+    border-left: 5px solid var(--isRead);
+}
+
+.bkPagesRead.isRead {
+    accent-color: var(--isRead);
+}
 /* NOTE: Footer */
 
 footer {
