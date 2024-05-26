@@ -17,24 +17,35 @@ const modalDel = document.querySelector(".modalDelete");
 const library = [];
 
 class Book {
-    constructor(title, author, year, pages) {
+    constructor(title, author, year, pages, pagesRead = 0, isRead = false) {
         this.title = title;
         this.author = author;
         this.year = year;
         this.pages = pages;
-        this.pagesRead = 0;
-        this.isRead = false;
+        this.pagesRead = pagesRead;
+        this.isRead = isRead;
     }
 }
 
 addSampleBooks();
 
 function addSampleBooks() {
-    const title = "The C Programming Language 2nd ed.";
-    const author = "Brian Kernighan & Dennis Ritchie"; 
-    const year = "1988";
-    const pages = "238";
-    library.push( new Book(title, author, year, pages) );
+    library.push( new Book(
+        "The C Programming Language 2nd ed.", 
+        "Brian Kernighan & Dennis Ritchie", 
+        "1988", 
+        "238",
+        "63"
+    ) );
+
+    library.push( new Book(
+        "How to lie with maps 3rd ed.", 
+        "Mark Monmonier", 
+        "2018", 
+        "231",
+        "231",
+        true
+    ) );
     refreshLibrary();
 }
 
@@ -45,22 +56,32 @@ function refreshLibrary() {
     }
 
     for (let i = 0; i < library.length; i++) {
-        let bookHTML =
 
-            "<div class='bkCard' index='" + i + "'>"
-                    + "<div class='bkInfo'>"
-                        + "<div class='bkTitle'>" + library[i].title + "</div>"
-                        + "<div class='bkAuthor'>" + library[i].author + "</div>"
-                        + "<div class='bkYear'>" + library[i].year + "</div>"
-                        + "<div class='bkPages'>" + library[i].pages + " pages</div>"
-                    + "</div>"
-                    + "<output>Pages read: "+ library[i].pagesRead  +"</output>"
-                    + "<input class='bkPagesRead' type='range' min='0' max='" + library[i].pages + "' step='1' value='" + library[i].pagesRead + "' oninput='this.previousElementSibling.value = &#39;Pages read: &#39; + this.value' />"
-                    +"<div class='bkBtns'>"
-                        + "<button class='editBk'>Edit</button>" 
-                        + "<button class='deleteBk'>X</button>"
-                    + "</div>"
-                + "</div>";
+       // HACK: this allows persistent isRead indicator on page refresh
+       let bkCardisReadHTML = "<div class='bkCard'";
+       let bkRangeisReadHTML = "<input class='bkPagesRead'";
+
+        if (library[i].pagesRead == library[i].pages) {
+            bkCardisReadHTML = "<div class='bkCard isRead' ";
+            bkRangeisReadHTML = "<input class='bkPagesRead isRead' ";
+        }
+        // 
+        
+        let bookHTML =
+            bkCardisReadHTML + "index='" + i + "'>"
+                + "<div class='bkInfo'>"
+                    + "<div class='bkTitle'>" + library[i].title + "</div>"
+                    + "<div class='bkAuthor'>" + library[i].author + "</div>"
+                    + "<div class='bkYear'>" + library[i].year + "</div>"
+                    + "<div class='bkPages'>" + library[i].pages + " pages</div>"
+                + "</div>"
+                + "<output>Pages read: "+ library[i].pagesRead  + "</output>"
+                + bkRangeisReadHTML + "type='range' min='0' max='" + library[i].pages + "' step='1' value='" + library[i].pagesRead + "' oninput='this.previousElementSibling.value = &#39;Pages read: &#39; + this.value' />"
+                +"<div class='bkBtns'>"
+                    + "<button class='editBk'>Edit</button>" 
+                    + "<button class='deleteBk'>X</button>"
+                + "</div>"
+            + "</div>";
         bkGrid.insertAdjacentHTML('beforeend', bookHTML);
     }
 }
