@@ -78,8 +78,8 @@ function refreshLibrary() {
                 + "<output>Pages read: "+ library[i].pagesRead  + "</output>"
                 + bkRangeisReadHTML + "type='range' min='0' max='" + library[i].pages + "' step='1' value='" + library[i].pagesRead + "' oninput='this.previousElementSibling.value = &#39;Pages read: &#39; + this.value' />"
                 +"<div class='bkBtns'>"
-                    + "<button class='deleteBk'>Delete</button>"
-                    + "<button class='editBk'>Edit</button>" 
+                    + "<button class='bkBtn deleteBk'>Delete</button>"
+                    + "<button class='bkBtn editBk'>Edit</button>" 
                 + "</div>"
             + "</div>";
         bkGrid.insertAdjacentHTML('beforeend', bookHTML);
@@ -175,5 +175,6 @@ function toggleModal(modal) {
 // Account for library array and html.
 function delBook(event) {
     event.preventDefault();
+    
     
 }
