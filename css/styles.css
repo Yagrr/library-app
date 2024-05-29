@@ -2,7 +2,9 @@
     --bgPrimary: #39454B;
     --bgSecondary: #343B43;
     --fontCol: #D2C6AA;
-    --cardBtnCol: #563929;
+    --cardBtnCol: #5A3C2B;
+    --cardBtnColHover: #523627;
+    --cardBtnColActive: #3C281D;
     --cardColor: #714B36;
     --isRead: #458664;
 }
@@ -134,12 +136,20 @@ main {
     gap: 25px;
 }
 
-.bkBtns button {
+.bkBtn {
     color: var(--fontCol);
     background-color: var(--cardBtnCol);
     padding: 10px 15px 10px 15px;
     margin-top: 10px;
     border-radius: 10px;
+}
+
+.bkBtn:hover {
+   background-color: var(--cardBtnColHover);
+}
+
+.bkBtn:active { 
+   background-color: var(--cardBtnColActive);
 }
 
 /* isRead = true - color green */
