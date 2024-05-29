@@ -2,6 +2,7 @@
     --bgPrimary: #39454B;
     --bgSecondary: #343B43;
     --fontCol: #D2C6AA;
+    --cardBtnCol: #563929;
     --cardColor: #714B36;
     --isRead: #458664;
 }
@@ -126,7 +127,22 @@ main {
     accent-color: #680F15;
 }
 
-/* isRead - Green up */
+.bkBtns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.bkBtns button {
+    color: var(--fontCol);
+    background-color: var(--cardBtnCol);
+    padding: 10px 15px 10px 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+/* isRead = true - color green */
 .bkCard.isRead {
     border-left: 5px solid var(--isRead);
 }
