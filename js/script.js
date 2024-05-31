@@ -89,20 +89,7 @@ function RefreshLibrary() {
 // HACK: Attaching event listeners to dynamic elements is annoying
 // Using event listener on grid. Trigger if target = bkPagesRead
 
-// Mouse
-BKGRID.addEventListener( "mouseup", (e) => {
-    if ( e.target.classList.contains('bkPagesRead') ) {
-        UpdatePagesRead(e);
-    }
-});
-// Keyboard
-BKGRID.addEventListener( "keyup", (e) => {
-    if ( e.target.classList.contains('bkPagesRead') ) {
-        UpdatePagesRead(e);
-    }
-});
-// Touchscreen
-BKGRID.addEventListener( "ontouchend", (e) => {
+BKGRID.addEventListener( "input", (e) => {
     if ( e.target.classList.contains("bkPagesRead") ) {
         UpdatePagesRead(e);
     }
