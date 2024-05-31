@@ -1,23 +1,23 @@
 // Script for adding, removing book entries
 // and tracking pages
-const bkGrid = document.querySelector(".bkGrid");
+const BKGRID = document.querySelector( ".bkGrid" );
 
-const btnAddBook = document.querySelector(".addBook");
+const BTNADDBOOK = document.querySelector( ".addBook" );
 
-const formNewBook = document.getElementById("formNewBook");
-const btnSubmit = document.querySelector(".bkSubmit");
+const FORMNEWBOOK = document.getElementById( "formNewBook" );
+const BTNSUBMIT = document.querySelector( ".bkSubmit" );
 
-const backdropID = document.getElementById("backdropID");
-const modalNew = document.getElementById("modalNew");
-const modalEdit = document.getElementById("modalEdit");
-const modalDel = document.querySelector(".modalDelete");
+const BACKDROP = document.getElementById( "backdropID" );
+const MODALNEW = document.getElementById( "modalNew" );
+const MODALEDIT = document.getElementById( "modalEdit" );
+const MODALDELETE = document.querySelector( ".modalDelete" );
 
 // NOTE: Library interactions
 
 const library = [];
 
 class Book {
-    constructor(title, author, year, pages, pagesRead = 0, isRead = false) {
+    constructor( title, author, year, pages, pagesRead = 0, isRead = false ) {
         this.title = title;
         this.author = author;
         this.year = year;
@@ -27,9 +27,9 @@ class Book {
     }
 }
 
-addSampleBooks();
+AddSampleBooks();
 
-function addSampleBooks() {
+function AddSampleBooks() {
     library.push( new Book(
         "The C Programming Language 2nd ed.", 
         "Brian Kernighan & Dennis Ritchie", 
@@ -46,27 +46,27 @@ function addSampleBooks() {
         "231",
         true
     ) );
-    refreshLibrary();
+    RefreshLibrary();
 }
 
-function refreshLibrary() {
+function RefreshLibrary() {
     // Removes all displayed books first before redisplaying
-    while (bkGrid.firstChild) {
-        bkGrid.removeChild(bkGrid.lastChild);
+    while ( BKGRID.firstChild ) {
+        BKGRID.removeChild( BKGRID.lastChild );
     }
 
-    for (let i = 0; i < library.length; i++) {
-
-       // HACK: this allows persistent isRead indicator on page refresh
+    for ( let i = 0; i < library.length; i++ ) {
+       // HACK: Change div classes if isRead == true
+        // allows persistent isRead indicator on page refresh
        let bkCardisReadHTML = "<div class='bkCard'";
        let bkRangeisReadHTML = "<input class='bkPagesRead'";
 
-        if (library[i].pagesRead == library[i].pages) {
+        if ( library[i].pagesRead == library[i].pages ) {
             bkCardisReadHTML = "<div class='bkCard isRead' ";
             bkRangeisReadHTML = "<input class='bkPagesRead isRead' ";
         }
-        // 
-        
+        // This is pretty disgusting but I can't find any other way to do this
+        // that fits my implementation that avoids innerHTML
         let bookHTML =
             bkCardisReadHTML + "index='" + i + "'>"
                 + "<div class='bkInfo'>"
@@ -82,99 +82,100 @@ function refreshLibrary() {
                     + "<button class='bkBtn editBk'>Edit</button>" 
                 + "</div>"
             + "</div>";
-        bkGrid.insertAdjacentHTML('beforeend', bookHTML);
+        BKGRID.insertAdjacentHTML( 'beforeend', bookHTML );
     }
 }
 
-// NOTE: Update pagesRead property when input range is used for a given card
-// Change card style depending on whether it is read
+// NOTE: User input on range PagesRead
 // HACK: Attaching event listeners to dynamic elements is annoying
 // Using event listener on grid. Trigger if target = bkPagesRead
 
 // Mouse
-bkGrid.addEventListener('mouseup', (e) => {
+BKGRID.addEventListener( 'mouseup', (e) => {
     if ( e.target.classList.contains('bkPagesRead') ) {
-        updatePagesRead(e);
+        UpdatePagesRead(e);
     }
 });
 // Keyboard
-bkGrid.addEventListener('keyup', (e) => {
+BKGRID.addEventListener( 'keyup', (e) => {
     if ( e.target.classList.contains('bkPagesRead') ) {
-        updatePagesRead(e);
+        UpdatePagesRead(e);
     }
 });
 // Touchscreen
-bkGrid.addEventListener('ontouchend', (e) => {
+BKGRID.addEventListener( 'ontouchend', (e) => {
     if ( e.target.classList.contains('bkPagesRead') ) {
-        updatePagesRead(e);
+        UpdatePagesRead(e);
     }
 });
 
-function updatePagesRead(e) {
+function UpdatePagesRead(e) {
+
     const inputPagesRead = e.target;
-    const card = inputPagesRead.parentNode;
-    const cardIndex = card.getAttribute("index");
+    const CARD = inputPagesRead.parentNode;
+    const cardIndex = CARD.getAttribute( "index" );
+
     library[cardIndex].pagesRead = inputPagesRead.value;
-    
-    // change style to green if read by adding isRead class
-    if (library[cardIndex].pagesRead == library[cardIndex].pages) {
+
+    // Logic to check if isRead == true and changes style
+    if ( library[cardIndex].pagesRead == library[cardIndex].pages ) {
         library[cardIndex].isRead = true;
-        card.classList.add("isRead");
-        inputPagesRead.classList.add("isRead");
-    } 
-    else {  
+        CARD.classList.add( "isRead" );
+        inputPagesRead.classList.add( "isRead" );
+    } else {  
         library[cardIndex].isRead = false;
-        card.classList.remove("isRead");
+        CARD.classList.remove("isRead");
         inputPagesRead.classList.remove("isRead");
     }
 }
 
+// NOTE: Modal and modal backdrop interactions
+
+function ToggleModal( modal ) {
+    BACKDROP.classList.toggle( "show" );
+    modal.classList.toggle( "show" );
+}
+
+function CloseModal() {
+    const MODAL = document.querySelector( ".modal" );
+    const BACKDROP = document.querySelector( ".backdrop" );
+    MODAL.classList.remove( "show" );
+    BACKDROP.classList.remove( "show" );
+}
+
+BACKDROP.addEventListener( "click", () => {
+    CloseModal(); 
+});
+
 // NOTE: Book creation (modals and buttons)
 
-btnAddBook.addEventListener("click", () => {
-    toggleModal(modalNew);
+BTNADDBOOK.addEventListener( "click", () => {
+    ToggleModal( MODALNEW );
 });
 
-btnSubmit.addEventListener("click", () => {
-    closeModal(); 
+BTNSUBMIT.addEventListener( "click", () => {
+    CloseModal(); 
 });
 
-formNewBook.addEventListener('submit', createBook);
+FORMNEWBOOK.addEventListener( 'submit', CreateBook );
 
-function createBook(event) {
+function CreateBook( event ) {
     event.preventDefault();
-    const bookData = new FormData(event.target);
-    const title = bookData.get('bookTitle');
-    const author = bookData.get('bookAuthor');
-    const year = bookData.get('bookYear');
-    const pages = bookData.get('bookPages');
-    library.push( new Book(title, author, year, pages) );
-    refreshLibrary();
-}
 
-backdropID.addEventListener("click", () => {
-    closeModal(); 
-});
+    const bookData = new FormData( event.target );
+    const title = bookData.get( 'bookTitle' );
+    const author = bookData.get( 'bookAuthor' );
+    const year = bookData.get( 'bookYear' );
+    const pages = bookData.get( 'bookPages' );
 
-function closeModal() {
-    const modal = document.querySelector(".modal");
-    const backdrop = document.querySelector(".backdrop");
-    modal.classList.remove("show");
-    backdrop.classList.remove("show");
-}
-
-function toggleModal(modal) {
-    const backdrop = document.querySelector(".backdrop");
-    backdrop.classList.toggle("show");
-    modal.classList.toggle("show");
+    library.push( new Book( title, author, year, pages ) );
+    RefreshLibrary();
 }
 
 // NOTE: Book deletion (buttons)
 
 // TODO: Write delete book function. 
 // Account for library array and html.
-function delBook(event) {
+function DeleteBook( event ) {
     event.preventDefault();
-    
-    
 }
