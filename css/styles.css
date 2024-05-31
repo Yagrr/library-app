@@ -188,7 +188,37 @@ footer {
 .addBook:hover {background-color: #7C8E61;}
 .addBook:active {background-color: #4F5B3E;}
 
-/* TODO: MODAL styling (to rename selectors) */
+#modalNew {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    background-color: var(--bgPrimary);
+    color: var(--fontCol);
+}
+
+.formRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.bkSubmit {
+    color: var(--fontCol);
+    background-color: var(--bgSecondary);
+    border-radius: 15px;
+    padding: 10px 15px;
+}
+
+.bkSubmit:hover {
+    background-color: #2A3337;
+}
+
+.bkSubmit:active {
+    background-color: #20272A;
+}
 
 .modal {
     display: flex;
