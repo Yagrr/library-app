@@ -10,7 +10,6 @@ const BTNSUBMIT = document.querySelector( ".bkSubmit" );
 const BACKDROP = document.getElementById( "backdropID" );
 const MODALNEW = document.getElementById( "modalNew" );
 const MODALEDIT = document.getElementById( "modalEdit" );
-const MODALDELETE = document.querySelector( ".modalDelete" );
 
 // NOTE: Library interactions
 
@@ -91,20 +90,20 @@ function RefreshLibrary() {
 // Using event listener on grid. Trigger if target = bkPagesRead
 
 // Mouse
-BKGRID.addEventListener( 'mouseup', (e) => {
+BKGRID.addEventListener( "mouseup", (e) => {
     if ( e.target.classList.contains('bkPagesRead') ) {
         UpdatePagesRead(e);
     }
 });
 // Keyboard
-BKGRID.addEventListener( 'keyup', (e) => {
+BKGRID.addEventListener( "keyup", (e) => {
     if ( e.target.classList.contains('bkPagesRead') ) {
         UpdatePagesRead(e);
     }
 });
 // Touchscreen
-BKGRID.addEventListener( 'ontouchend', (e) => {
-    if ( e.target.classList.contains('bkPagesRead') ) {
+BKGRID.addEventListener( "ontouchend", (e) => {
+    if ( e.target.classList.contains("bkPagesRead") ) {
         UpdatePagesRead(e);
     }
 });
@@ -157,7 +156,11 @@ BTNSUBMIT.addEventListener( "click", () => {
     CloseModal(); 
 });
 
-FORMNEWBOOK.addEventListener( 'submit', CreateBook );
+FORMNEWBOOK.addEventListener( "submit", (e) => { 
+    CreateBook(e);
+    // Reset form
+    document.forms[1].reset()
+});
 
 function CreateBook( event ) {
     event.preventDefault();
@@ -173,9 +176,32 @@ function CreateBook( event ) {
 }
 
 // NOTE: Book deletion (buttons)
+//
+// Mouse
+BKGRID.addEventListener( "mouseup", (e) => {
+    if ( e.target.classList.contains('deleteBk') ) {
+        DeleteBook(e);
+    }
+});
+// Keyboard
+BKGRID.addEventListener( "keyup", (e) => {
+    if ( e.target.classList.contains('deleteBk') ) {
+        DeleteBook(e);
+    }
+});
+// Touchscreen
+BKGRID.addEventListener( "ontouchend", (e) => {
+    if ( e.target.classList.contains("deleteBk") ) {
+        DeleteBook(e);
+    }
+});
 
-// TODO: Write delete book function. 
-// Account for library array and html.
-function DeleteBook( event ) {
-    event.preventDefault();
+function DeleteBook( e ) {
+
+    const deleteButton = e.target;
+    const CARD = deleteButton.parentNode.parentNode;
+    const cardIndex = CARD.getAttribute( "index" );
+    library.splice( cardIndex,1 );
+    RefreshLibrary();
+
 }
