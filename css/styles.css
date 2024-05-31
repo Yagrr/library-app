@@ -25,7 +25,7 @@ body {
 
 .wrapper {
     display: grid;
-    grid-template: 10% 1fr 3% / 100vw;
+    grid-template: 10% 1fr 5% / 100vw;
     grid-template-areas: 
         "header"
         "content"
@@ -164,7 +164,22 @@ main {
 /* NOTE: Footer */
 
 footer {
+    text-align: center; 
     background-color: var(--bgPrimary);
+}
+
+.yagrr {
+    font-weight: bold; 
+    text-decoration: none;
+    color: var(--fontCol);
+    transition: all .2s ease-in-out
+}
+
+.yagrr:hover {
+    text-shadow: 0 0 20px #FBEDCB;
+    -webkit-animation: 1s ease-in-out;
+    -moz-animation:  1s ease-in-out ;
+    animation:  1s ease-in-out;
 }
 
 /* NOTE: Modal */
