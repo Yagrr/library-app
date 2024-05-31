@@ -7,16 +7,12 @@
         <link href="css/styles.css" rel="stylesheet">
     </head>
     <body>
-        <!-- TODO: Create page layout with header and grid. 
-                Create button to add book entry  --> 
-
         <!---------Wrapper--------->
         <div class="wrapper">
             <!---------Header--------->
             <header>
-                <div class="title">Libellus</div>
 
-                <!-- TODO: Hide search form until clicked on by btnSearch -->
+                <div class="title">Libellus</div>
                 <div class="search-wrapper">
                     <form action='' method='get' class='searchbar'>
                         <div class='form-row'>
@@ -25,6 +21,7 @@
                     </form>
                     <button class="btnSearch"></button> 
                 </div>
+
             </header>
 
             <!---------Main--------->
@@ -34,17 +31,12 @@
                 </div>
 
             </main>
-            <!-- 
-TODO: mobile - Position absolute on bottom right of screen 
-Add button book to header
--->
+
             <button class="addBook">+</button>
 
             <!---------Book statistics--------->
             <div class="bkStats">
-                <!---
-TODO: track total books, total pages, read books, unread
---->   
+
             </div>
 
         <!---------Footer--------->
@@ -53,6 +45,7 @@ TODO: track total books, total pages, read books, unread
             </footer>
 
         </div>
+
         <!---------Modals--------->
         <div id="backdropID" class="backdrop"></div>
 
@@ -78,7 +71,7 @@ TODO: track total books, total pages, read books, unread
                 />
                 </div>
 
-                <div class="form-row">
+                <div class="formRow">
                     <label for="bookYear">Year</label>
                     <input 
                     id="bookYear"
@@ -90,7 +83,7 @@ TODO: track total books, total pages, read books, unread
                 />
                 </div>
 
-                <div class="form-row">
+                <div class="formRow">
                     <label for="bookPages">Pages</label>
                     <input 
                     id="bookPages"
