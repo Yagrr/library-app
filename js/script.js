@@ -5,6 +5,8 @@ const BKGRID = document.querySelector( ".bkGrid" );
 const BTNADDBOOK = document.querySelector( ".addBook" );
 
 const FORMNEWBOOK = document.getElementById( "formNewBook" );
+const FORMEDITBOOK = document.getElementById( "formEditBook" );
+
 const BTNSUBMIT = document.querySelector( ".bkSubmit" );
 
 const BACKDROP = document.getElementById( "backdropID" );
@@ -123,9 +125,9 @@ function ToggleModal( modal ) {
 }
 
 function CloseModal() {
-    const MODAL = document.querySelector( ".modal" );
+    const MODALS = document.querySelectorAll( ".modal" );
     const BACKDROP = document.querySelector( ".backdrop" );
-    MODAL.classList.remove( "show" );
+    MODALS.forEach( e => e.classList.remove("show") );
     BACKDROP.classList.remove( "show" );
 }
 
@@ -139,12 +141,9 @@ BTNADDBOOK.addEventListener( "click", () => {
     ToggleModal( MODALNEW );
 });
 
-BTNSUBMIT.addEventListener( "click", () => {
-    CloseModal(); 
-});
-
 FORMNEWBOOK.addEventListener( "submit", (e) => { 
     CreateBook(e);
+    CloseModal(); 
     // Reset form
     document.forms[1].reset()
 });
@@ -153,29 +152,24 @@ function CreateBook( event ) {
     event.preventDefault();
 
     const bookData = new FormData( event.target );
-    const title = bookData.get( 'bookTitle' );
-    const author = bookData.get( 'bookAuthor' );
-    const year = bookData.get( 'bookYear' );
-    const pages = bookData.get( 'bookPages' );
+    const title = bookData.get( "bookTitle" );
+    const author = bookData.get( "bookAuthor" );
+    const year = bookData.get( "bookYear" );
+    const pages = bookData.get( "bookPages" );
 
     library.push( new Book( title, author, year, pages ) );
     RefreshLibrary();
 }
 
 // NOTE: Book deletion (buttons)
-//
+
 // Mouse
 BKGRID.addEventListener( "mouseup", (e) => {
     if ( e.target.classList.contains('deleteBk') ) {
         DeleteBook(e);
     }
 });
-// Keyboard
-BKGRID.addEventListener( "keyup", (e) => {
-    if ( e.target.classList.contains('deleteBk') ) {
-        DeleteBook(e);
-    }
-});
+
 // Touchscreen
 BKGRID.addEventListener( "ontouchend", (e) => {
     if ( e.target.classList.contains("deleteBk") ) {
@@ -183,12 +177,70 @@ BKGRID.addEventListener( "ontouchend", (e) => {
     }
 });
 
-function DeleteBook( e ) {
+function DeleteBook( event ) {
 
-    const deleteButton = e.target;
-    const CARD = deleteButton.parentNode.parentNode;
+    const deleteBtn = event.target;
+    const CARD = deleteBtn.parentNode.parentNode;
     const cardIndex = CARD.getAttribute( "index" );
     library.splice( cardIndex,1 );
     RefreshLibrary();
 
 }
+
+// NOTE: Book editing modal and submission
+
+
+// Mouse
+BKGRID.addEventListener( "mouseup", (e) => {
+    if ( e.target.classList.contains("editBk") ) {
+        FillEditModal( e );
+        ToggleModal( MODALEDIT );
+    }
+});
+
+// Touchscreen
+BKGRID.addEventListener( "ontouchend", (e) => {
+    if ( e.target.classList.contains("editBk") ) {
+        FillEditModal( e );
+        ToggleModal( MODALEDIT );
+    }
+});
+
+FORMEDITBOOK.addEventListener( "submit", (e) => { 
+    EditBook(e); 
+    CloseModal(); 
+    // Reset form
+    document.forms[2].reset()
+});
+
+// HACK: Use global variable to transfer cardIndex from editBtn to modalEdit
+// submission
+let g_cardIndex;
+
+function FillEditModal( e ) {
+    const editBtn = e.target
+    const CARD = editBtn.parentNode.parentNode;
+    g_cardIndex = CARD.getAttribute( "index" );
+    const book = library[g_cardIndex];
+
+    document.getElementsByName("bookTitleEdit")[0].value = book.title;
+    document.getElementsByName("bookAuthorEdit")[0].value = book.author;
+    document.getElementsByName("bookYearEdit")[0].value = book.year;
+    document.getElementsByName("bookPagesEdit")[0].value = book.pages;
+    
+}
+
+function EditBook( event ) {
+    event.preventDefault();  
+    
+    const bookEditedData = new FormData( event.target );
+    library[g_cardIndex].title = bookEditedData.get( "bookTitleEdit" );
+    library[g_cardIndex].author = bookEditedData.get( "bookAuthorEdit" );
+    library[g_cardIndex].year = bookEditedData.get( "bookYearEdit" );
+    library[g_cardIndex].pages = bookEditedData.get( "bookPagesEdit" );
+    // If pagesRead > pages (edited), set pagesRead as max pages to avoid overflow
+    if ( library[g_cardIndex].pages < library[g_cardIndex].pagesRead ) {
+        library[g_cardIndex].pagesRead = 0;
+    }
+    RefreshLibrary();
+} 
