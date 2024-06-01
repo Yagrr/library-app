@@ -101,7 +101,56 @@
 
             <!---------Modal: edit entry--------->
             <dialog id="modalEdit" class="modal">
-            </dialog>
+                <form id="formEditBook">
+                    <div class="formRow">
+                        <label for="bookTitleEdit">Book Title</label>
+                        <input 
+                        id="bookTitleEdit"
+                        name="bookTitleEdit"
+                        type="text"
+                        value=""
+                    />
+                    </div>
+
+
+                    <div class="formRow">
+                        <label for="bookAuthorEdit">Author(s)</label>
+                        <input 
+                        id="bookAuthorEdit"
+                        name="bookAuthorEdit"
+                        type="text"
+                        value=""
+                    />
+                    </div>
+
+                    <div class="formRow">
+                        <label for="bookYearEdit">Year</label>
+                        <input 
+                        id="bookYearEdit"
+                        name="bookYearEdit"
+                        type="number"
+                        min="0"
+                        max="2025"
+                        step="1"
+                        value=""
+                    />
+                    </div>
+
+                    <div class="formRow">
+                        <label for="bookPagesEdit">Pages</label>
+                        <input 
+                        id="bookPagesEdit"
+                        name="bookPagesEdit"
+                        type="number"
+                        min="0"
+                        max="9999"
+                        step="1"
+                        value=""
+                    />
+                    </div>
+                    <button form="formEditBook" class="bkSubmit">Edit</button>
+                </form>
+        </dialog>
 
     </body>
     <script src="js/script.js"></script>
